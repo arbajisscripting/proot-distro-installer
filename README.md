@@ -12,7 +12,7 @@ The Proot Distro Installer is a Bash script that simplifies the process of insta
 1. Clone this repository or copy the script to your local machine:
 
 ```bash
-git clone https://github.com/your-username/proot-distro-installer.git
+git clone https://github.com/arbajisscripting/proot-distro-installer.git
 cd proot-distro-installer
 ```
 
