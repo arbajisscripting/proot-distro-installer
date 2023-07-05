@@ -1,18 +1,26 @@
 #!/bin/bash
 
+# Color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
 # Function to display the menu and get user's choice
 function display_menu() {
   clear
-  echo "============================="
+  echo -e "${CYAN}============================="
   echo "Proot Distro Installer"
-  echo "============================="
-  echo "Choose an action:"
-  echo "1. Install a Linux distribution"
-  echo "2. Run an installed distribution"
-  echo "3. Install a custom distribution"
-  echo "4. Exit"
-  echo "============================="
-  read -p "Enter your choice (1-4): " choice
+  echo "=============================${RESET}"
+  echo -e "${YELLOW}Choose an action:"
+  echo -e "1. ${GREEN}Install a Linux distribution"
+  echo -e "${YELLOW}2. ${GREEN}Run an installed distribution"
+  echo -e "${YELLOW}3. ${GREEN}Install a custom distribution"
+  echo -e "${YELLOW}4. ${GREEN}Exit${RESET}"
+  echo -e "${CYAN}=============================${RESET}"
+  read -p "${YELLOW}Enter your choice (1-4): ${RESET}" choice
 }
 
 # Function to install the selected distribution
@@ -20,14 +28,14 @@ function install_distro() {
   case $1 in
     1)
       clear
-      echo "============================="
+      echo -e "${CYAN}============================="
       echo "Choose a Linux distribution to install:"
-      echo "1. Ubuntu"
-      echo "2. Debian"
-      echo "3. Kali Linux"
-      echo "4. Back to main menu"
-      echo "============================="
-      read -p "Enter your choice (1-4): " distro_choice
+      echo "1. ${GREEN}Ubuntu"
+      echo "2. ${GREEN}Debian"
+      echo "3. ${GREEN}Kali Linux"
+      echo "4. ${GREEN}Back to main menu"
+      echo -e "${CYAN}=============================${RESET}"
+      read -p "${YELLOW}Enter your choice (1-4): ${RESET}" distro_choice
       case $distro_choice in
         1)
           pkg install proot-distro
@@ -45,21 +53,21 @@ function install_distro() {
           return
           ;;
         *)
-          echo "Invalid choice. Please choose a valid option."
+          echo -e "${RED}Invalid choice. Please choose a valid option.${RESET}"
           sleep 2
           ;;
       esac
       ;;
     2)
       clear
-      echo "============================="
+      echo -e "${CYAN}============================="
       echo "Choose an installed distribution to run:"
-      echo "1. Ubuntu"
-      echo "2. Debian"
-      echo "3. Kali Linux"
-      echo "4. Back to main menu"
-      echo "============================="
-      read -p "Enter your choice (1-4): " run_choice
+      echo "1. ${GREEN}Ubuntu"
+      echo "2. ${GREEN}Debian"
+      echo "3. ${GREEN}Kali Linux"
+      echo "4. ${GREEN}Back to main menu"
+      echo -e "${CYAN}=============================${RESET}"
+      read -p "${YELLOW}Enter your choice (1-4): ${RESET}" run_choice
       case $run_choice in
         1)
           proot-distro login ubuntu
@@ -74,24 +82,24 @@ function install_distro() {
           return
           ;;
         *)
-          echo "Invalid choice. Please choose a valid option."
+          echo -e "${RED}Invalid choice. Please choose a valid option.${RESET}"
           sleep 2
           ;;
       esac
       ;;
     3)
       clear
-      read -p "Enter the URL of the custom tarball or rootfs archive: " custom_url
-      read -p "Enter a name for the custom distribution: " custom_name
+      read -p "${YELLOW}Enter the URL of the custom tarball or rootfs archive: ${RESET}" custom_url
+      read -p "${YELLOW}Enter a name for the custom distribution: ${RESET}" custom_name
       pkg install proot-distro
       proot-distro install $custom_name $custom_url
       ;;
     4)
-      echo "Exiting..."
+      echo -e "${CYAN}Exiting...${RESET}"
       exit 0
       ;;
     *)
-      echo "Invalid choice. Please choose a valid option."
+      echo -e "${RED}Invalid choice. Please choose a valid option.${RESET}"
       sleep 2
       ;;
   esac
@@ -100,6 +108,6 @@ function install_distro() {
 while true; do
   display_menu
   install_distro $choice
-  echo "Press Enter to continue..."
+  echo -e "${BLUE}Press Enter to continue...${RESET}"
   read
 done
